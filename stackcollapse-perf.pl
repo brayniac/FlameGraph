@@ -142,7 +142,7 @@ foreach (<STDIN>) {
 			$func =~ tr/"\'//d;
 			# fall through to $tidy_java
 		}
-		if ($tidy_java and $pname eq "java") {
+		if ($tidy_java and $pname and $pname eq "java") {
 			# along with $tidy_generic, converts the following:
 			#	Lorg/mozilla/javascript/ContextFactory;.call(Lorg/mozilla/javascript/ContextAction;)Ljava/lang/Object;
 			#	Lorg/mozilla/javascript/ContextFactory;.call(Lorg/mozilla/javascript/C
@@ -162,3 +162,5 @@ foreach (<STDIN>) {
 foreach my $k (sort { $a cmp $b } keys %collapsed) {
 	print "$k $collapsed{$k}\n";
 }
+
+warn "No data processed!\nCheck input file and perf record syntax!\n" unless keys %collapsed;
